@@ -60,6 +60,15 @@ userSchema.statics.getUsers = async function () {
   }
 }
 
+userSchema.statics.getUserByIds = async function (ids) {
+  try {
+    const users = await this.find({ _id: { $in: ids } });
+    return users;
+  } catch (error) {
+    throw error;
+  }
+}
+
 userSchema.statics.deleteUserById = async function (id) {
   try {
     console.log(typeof(id));
