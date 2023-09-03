@@ -49,12 +49,14 @@ const chatMessageSchema = new mongoose.Schema(
  */
 chatMessageSchema.statics.createPostInChatRoom = async function (chatRoomId, message, postedByUser) {
   try {
+    console.log("chat message controller working");
     const post = await this.create({
       chatRoomId,
       message,
       postedByUser,
       readByRecipients: { readByUserId: postedByUser }
     });
+    console.log(post);
     const aggregate = await this.aggregate([
       // get post where _id = post._id
       { $match: { _id: post._id } },
